@@ -1,0 +1,1139 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Patience of a SAINT</title>
+
+	<link rel="stylesheet" href="../reveal.js/css/reset.css">
+	<link rel="stylesheet" href="../reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../reveal.js/css/theme/night.css">
+
+	<style type="text/css">
+		section {
+			text-align: left;
+		}
+		.multicol {
+			display: flex;
+		}
+		.col {
+			flex: 1;
+		}
+		.fixed-highlight-green {
+			color: #17ff2e; 
+		}
+		.fixed-highlight-red {
+			color: #ff2c2d;
+		}
+		.ribbon {
+			/* positioning */
+			position: fixed;
+			padding: 5px 45px;
+			width: 256px;
+			/* top right of the page */
+			top: 50px;
+			right: -250px;
+			-webkit-transform: rotate(45deg);
+			-moz-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+			text-align: center;
+			/* effects with some shadow */
+			box-shadow: 0 0 0 3px #00946c, 0 0 20px -3px rgba(0, 0, 0, 0.5);
+			text-shadow: 0 0 0 #e5e5e5, 0 0 5px rgba(0, 0, 0, 0.3);
+			/* looks */
+			background-color: #00946c;
+			color: #e5e5e5;
+			font-size: 13px;
+			font-family: sans-serif;
+			text-decoration: none;
+			font-weight: bold;
+			/* ribbon effects */
+			border: 2px dotted #e5e5e5;
+			/* webkit antialias fix */
+			-webkit-backface-visibility: hidden;
+			letter-spacing: .5px;
+		}
+	</style>
+
+</head>
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section>
+
+				<section>
+					<h2>Patience of a SAINT</h2>
+					<p>Why and how to professionalize <br/> ABAP software delivery</p>
+				</section>
+
+				<section>
+					<h3>about://me</h3>
+					<p>Volker Wegert</p>
+					<p>Team Lead SAP Healthcare @ x-tention</p>
+					<div class="ribbon fragment">We are hiring!</div>
+					<div class="fragment">
+						<p>ABAP development since 2001/2002</p>
+						<p>Add-on production since 2008</p>
+					</div>
+					<aside class="notes">
+						<p>
+							responsible for the SAP Healthcare team at x-tention Informationstechnologie GmbH
+						</p>
+						<p>
+							full-service IT provider; healthcare applications; team: clinical solutions based on SAP technologies; hiring
+						</p>
+						<p>
+							ABAP development for 17 years; first contact with add-on delivery 10 years
+						</p>
+						<p>
+							three different add-on production environments, two of which I initiated and setup
+						</p>
+						<p>
+							Today: reasons why important topic; lessons learned.
+						</p>
+					</aside>
+				</section>
+
+			</section>
+
+			<section>
+				<h3>Overview</h3>
+
+				<section>
+					<h4>Scope</h4>
+
+					<p class="fragment" data-fragment-index="1">missing (intentionally):</p>
+					<ul>
+						<li class="fragment" data-fragment-index="2">software development guidelines / best practices</li>
+						<li class="fragment" data-fragment-index="2">testing and quality assurance</li>
+						<li class="fragment" data-fragment-index="3">technical software design</li>
+						<li class="fragment" data-fragment-index="3">functional design and product management</li>
+					</ul>
+					<p class="fragment">focus: <span class="fixed-highlight-green">software delivery</span></p>
+					<aside class="notes">
+						<!-- 1:00 -->
+						<p>
+							describe the scenery; not going to talk about:
+						</p>
+						<p>
+							software development: assume know how to develop software worth delivering; assume software is developed, tested, ready to be delivered
+						</p>
+						<p>
+							design: technical or functional pov. Agile Manifesto, Holy Church of the Waterfall, Flying Spaghetti Monster - not my business
+						</p>
+						<p>
+							focusing on: How do I get the software product delivered to the customer? Who gets to ask this question?
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Usage Scenarios</h4>
+					<p class="fragment" data-fragment-index="1">classic software product development:</p>
+					<ul>
+						<li class="fragment" data-fragment-index="1">extensible standard software</li>
+						<li class="fragment" data-fragment-index="1">develop locally, deploy globally</li>
+						<li class="fragment" data-fragment-index="2">little to no knowledge about customer systems</li>
+					</ul>
+					<p class="fragment" data-fragment-index="3">internal development:</p>
+					<ul>
+						<li class="fragment" data-fragment-index="4">multiple independent system sub-landscapes</li>
+						<li class="fragment" data-fragment-index="4">consolidation not feasible</li>
+						<li class="fragment" data-fragment-index="5">deployment of standardized solutions required</li>
+					</ul>
+					<aside class="notes">
+						<!-- 2:05 -->
+						<p>
+							two scenarios
+						</p>
+						<p>
+							software or solution provider; ABAP development; creates software products locally, installed into * customer system landscapes
+						</p>
+						<p>
+							classic use case: standardized software package, configured / enhanced by customer; few assumptions about customers / system landscapes: new customers any time; possily no direct contact: re-selling partners
+						</p>
+						<p>
+							(also: receiving end / get handed add-on packaged professionaly, know what's been going on at producer's side, what will happen in your system.)
+						</p>
+						<p>
+							also: within customer landscape (uncommon); ideally: consolidate for standard toolkot CTS/TMS.
+						</p>
+						<p>
+							sometimes not feasible: legal, functional, technical reasons; development freeze conflicts with projects; cost too high; loss of flexibility / transparency
+						</p>
+						<p>
+							goal: deliver standardized solutions into * system landscapes within organization, add-on based approach maybe viable option
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4><span class="fragment highlight-green">Product</span> Development Expectations</h4>
+					<ul class="fragment">
+						<li>paying customers</li>
+						<li>consolidated solution</li>
+						<li>low-risk installation</li>
+						<li>seamless integration</li>
+					</ul>
+					<ul class="fragment">
+						<li>vendor-based support and maintenance</li>
+						<li>limiting variations</li>
+						<li>customer-agnostic delivery</li>
+					</ul>
+					<aside class="notes">
+						<!-- 2:20 -->
+						<p>
+							software products: customers expect / pay for consolidated, pre-packaged software solution
+						</p>
+						<p>
+							installation into existing systems w/o negative impact; will perform task in peaceful co-existence with SAP standard and other add-ons
+						</p>
+						<p>
+							products: clearly identifiable vendor, support and maintenance.
+						</p>
+						<p>
+							interest: ensuring software installed / upgraded consistently; support new customers: consolidated piece of software, limited code bases
+						</p>
+						<p>
+							customers expect: software to install, configure and use; single point of contact
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Distributed Development <span class="fragment highlight-red">Challenges</span></h4>
+					<ul class="fragment">
+						<li>security considerations</li>
+						<li>maintenance and responsibility</li>
+					</ul>
+					<ul class="fragment">
+						<li>vendor reputation</li>
+						<li>financial impact</li>
+					</ul>
+					<p class="fragment">No judgement - always consider intended use case!</p>
+					<aside class="notes">
+						<p>
+							"classic" approach conflicts open source distributed development, challenges
+						</p>
+						<p>
+							paying customers: not happy with "connect development system to internet, download following third-party components, can not assume responsibility" or "found bug in open source ABAP library, file bug"
+						</p>
+						<p>
+							software provider: not rely on external components w/ little control over, introduce breaking changes at any point, SLAs
+						</p>
+						<p>
+							not to judge which approach better - valid points for both. andd-on delivery not designed considerung open source development; show what it can do nonetheless
+						</p>
+					</aside>
+				</section>				
+			</section>
+
+			<section>
+				<h3>Poll</h3>
+				<p>Who among you...</p>
+				<ul>
+					<li class="fragment">...should be using add-on based delivery?</li>
+					<li class="fragment">...is already producing add-ons?</li>
+					<li class="fragment">...is a customer / recipient?</li>
+					<li class="fragment">...🍕?</li>
+				</ul>
+				<aside class="notes">
+					<!-- 0:45 -->
+					<p>
+						Who among you is in a position that, after this introduction, feels that you actually should be using add-ons to deliver your software?
+					</p>
+					<p>
+						Who is already producing add-ons?
+					</p>
+					<p>
+						Who considers themself a typical customer / on the receiving end?
+					</p>
+					<p>
+						And who is along just for the pizza?
+					</p>
+				</aside>
+			</section>
+
+			<section>
+				<h3>Add-On Delivery Process</h3>
+				<section>
+					<div align="center">
+						<p>Development and Preparation</p>
+						<p>▼</p>
+						<p>Composition</p>
+						<p>▼</p>
+						<p>Assembly and Test</p>
+						<p>▼</p>
+						<p>Installation</p>
+					</div>
+					<aside class="notes">
+						<!--  -->
+						<p>
+							Before pros / cons: decribe process
+						</p>
+						<p>
+							skip historical variants and special use cases
+						</p>
+					</aside>
+				</section>		
+
+				<section>
+					<h4>Development and Preparation</h4>
+					<div class="multicol">
+						<div class="col">
+							<p>Development System</p>
+							<ul>
+								<li>regular ABAP development</li>
+								<li>some restrictions apply</li>
+							</ul>
+						</div>
+						<div class="col fragment">
+							<p>Delivery System</p>
+							<ul>
+								<li>identify missing objects</li>
+							</ul>
+						</div>
+					</div>
+					<div class="multicol fragment">
+						<div class="col">
+							<ul>
+								<li>frequently erratic settings</li>
+							</ul>
+						</div>
+						<div class="col">
+							<ul>
+								<li>stable testing environment</li>
+							</ul>
+						</div>
+					</div>
+					<aside class="notes">
+						<!--  -->
+						<p>
+							producer: perform / complete ABAP development; additional restrictions (object types, not used anyway) 
+						</p>
+						<p>
+							satisfied with state on development system: transport to delivery system
+						</p>
+						<p>
+							ensure don't forget objects; stable testing environment, development systems: weird settings, inconsistencies
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Software Delivery Composer</h4>
+					<div class="multicol">
+						<div class="col">
+							<img src="img/SDC.png" />
+						</div>
+						<div class="col">
+							<ul>
+								<li class="fragment">Object Collection, Checks</li>
+								<li class="fragment">Result: Installation / Upgrade or Support Package files</li>
+							</ul>
+						</div>
+					</div>
+					<aside class="notes">
+						<p>
+							tests completed, software can be shiped: <i>Software Delivery Composer</i>, part of <i>Add-On Assembly Kit</i> (AAK)
+						</p>
+						<p>
+							SDC guides through first part of delivery process: collects objects, performs consistency checks, produces 1..n files
+						</p>
+						<p>
+							current projects: installation, optionally upgrade. minor fix: patch / support package
+						</p>
+						<p>
+							package files ~ enhanced transport data files
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Software Delivery Assembler</h4>
+					<div class="multicol">
+						<div class="col">
+							<img src="img/SDA-1.png" width="90%" />
+						</div>
+						<div class="col">
+							<div class="multicol fragment">
+								<div class="col">
+									<img src="img/SDA-2.png" />		
+								</div>
+								<div class="col">
+									<img src="img/SDA-3.png" />
+								</div>
+							</div>
+							<div class="fragment">
+								<div>Result:</div>
+								<ul>
+									<li>PAT installation files</li>
+									<li>SAR archive for distribution</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<aside class="notes">
+						<!--  -->
+						<p>
+							package files registered using <i>Software Delivery Assembler</i>: provide additional information, constraints
+						</p>
+						<p>
+							resulting PAT / SAR files: installation test runs (technical consistency, correct attributes); only then allowed to distribute
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Installation</h4>
+					<div class="multicol">
+						<div class="col">
+							<img src="img/SAINT.png" width="80%" />	
+						</div>
+						<div class="col">
+							<img src="img/SPAM.png" width="80%" />
+							<div>SAINT / SPAM</div>	
+						</div>
+					</div>
+					<aside class="notes">
+						<!--  -->
+						<p>
+							customer: installation boring. SAINT / SPAM, upload and import
+						</p>
+						<p> 
+							installations / upgrades: wizard, ensure prerequisites met. support packages slightly different, but known to every basis administrator
+						</p>
+						<p>
+							next: highlight advantages of using the AAK, describe prerequisites / costs
+						</p>
+					</aside>
+				</section>
+
+			</section>
+
+			<section>
+				<h3>Alternative Approaches</h3>
+
+				<section>
+					<h4>Candidates</h4>
+					<div class="multicol fragment">
+						<div class="col">
+							<img src="img/abapGit-SAPlink-Logos.png" width="80%" />
+						</div>
+						<div class="col">
+							<img src="img/TMS-Logo.png" width="80%" />
+						</div>
+					</div>
+					<aside class="notes">
+						<!-- 0:40 -->
+						<p>
+							which alternative approaches to consider - benefits compared to what, what problems solved?
+						</p>
+						<p>
+							abapGit and SAPlink; workhorse CTS with TMS. 
+						</p>
+						<p>
+							not all special cases, just overview of key issues
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>abapGit</h4>
+					<p>(also applies to SAPlink, ...)</p>
+					<ul>
+						<li class="fragment" data-fragment-index="1">highly automated copy & paste</li>
+						<li class="fragment" data-fragment-index="2"><span class="fixed-highlight-green">great tool</span> for certain applications</li>
+						<li class="fragment" data-fragment-index="2"><span class="fixed-highlight-red">wrong tool</span> for this task</li>
+						<li class="fragment" data-fragment-index="3">no special system access</li>
+						<li class="fragment" data-fragment-index="3">just another local editing tool</li>
+						<li class="fragment" data-fragment-index="3">rules and restrictions apply</li>
+					</ul>
+					<aside class="notes">
+						<p>
+							summarize abapGit, SAPlink - one type of solution. very different approaches outside of the system - repository interaction: automated copy&paste
+						</p>
+						<p>
+							intention not to belittle projects: great tools, as long as applied to appropriate tasks
+						</p>
+						<p>
+							this is not; advertising abapGit as software delivery tool = does not know about challenges or ignoring them
+						</p>
+						<p>
+							can't do anything with abapGit that you couldn't also do manually - no magic
+						</p>
+						<p>
+							ABAP repository: just different tool, editor. rules / restrictions apply, consistency: good!
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Namespaces</h4>
+					<div class="multicol">
+						<div class="col fragment">
+							<div>Customer (Y.../Z...)</div>
+							<ul>
+								<li>freely available</li>
+								<li><span class="fixed-highlight-green">local</span> governance required</li>
+								<li><span class="fixed-highlight-red">no protection</span> against collisions</li>
+							</ul>
+						</div>
+						<div class="col fragment">
+							<div>Partner (/FOOBAR/...)</div>
+							<ul>
+								<li>enforce ownership</li>
+								<li><span class="fixed-highlight-green">global</span> protection enforced</li>
+								<li>distributed object editing <span class="fixed-highlight-red">prohibited</span></li>
+							</ul>
+						</div>
+					</div>
+					<p class="fragment">
+						🔥 No delivery into protected namespaces
+					</p>
+					<aside class="notes">
+						<p>
+							Case in point: Namespaces. No open namespace concept like Java.
+						</p>
+						<p>
+							globally available customer namespaces; local governance: ensure consistent authorship. No provisions / conventions against creating object with same name.
+						</p>
+						<p>
+							example: encapsulate user master data, choose ZCL_USER_DATA - so can anybody else. perfectly legal, provided: disjunct system landscapes. prerequisite for implicit customer namespaces. No automated resolution of naming collisions - not possible(?)
+						</p>
+						<p>
+							ABAP commercial background, requirements: ownership, liability, consistency. Owner: full access, keep everyone else from producing objects w/in namespace. reserved partner namespaces.
+						</p>
+						<p>
+							protected namespaces, bound to object source system: inherently incompatible with DCVS; 
+							publish object in protected namespace to Git repository - OK. No import into just any other system.
+						</p>
+						<p>
+							target system belongs to producer - no delivery, local management - great application of abapGit
+							allow customer import: distribute production key. impractical, renders protective function void
+						</p>
+						<p>
+							Bottom line: Don't use abapGit: great hammer - problem isn't nail-shaped
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Change and Transport System (CTS)</h4>
+					<div class="multicol">
+						<div class="col">
+							<p>
+								Records <span class="fragment highlight-red" data-fragment-index="1">changes to objects</span> in a system and <span class="fragment highlight-red" data-fragment-index="2">applies these changes</span> to a target system.
+							</p>
+							<p class="fragment" data-fragment-index="3">
+								⤷ diff / patch
+							</p>
+						</div>
+						<div class="col" >
+							<p>
+								<span class="fragment" data-fragment-index="1">Records <span class="fixed-highlight-green">changed objects</span> in a system</span> <span class="fragment" data-fragment-index="2">and <span class="fixed-highlight-green" >transfers the changed objects</span> to a target system.</span>
+							</p>
+							<p class="fragment" data-fragment-index="4">
+								⤷ flag / copy
+							</p>
+						</div>
+					</div>
+					<aside class="notes">
+						<p>
+							CTS: most know it, (read sentence)
+						</p>
+						<p>
+							No. Close, but no cigar. Does not record the changes - only records changed objects. Does not apply changes, but transfers entire changed object. (sub-object, same principle)
+						</p>
+						<p>
+							Recording changes: "diff", applying changes: "patch" - not what CTS does: flags and copies objects  in their entirety
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>CTS Design Considerations</h4>
+					<ul>
+						<li class="fragment">Goal: Customer System Landscape Consistency</li>
+						<li class="fragment">All systems known by unique SID</li>
+						<li class="fragment">Consistent release/patch levels</li>
+						<li class="fragment">Local source system for every customer object</li>
+						<li class="fragment">Local governance of development</li>
+					</ul>
+					<aside class="notes">
+						<p>
+							Step back: apparent flaws of CTS, but keep intended purpose in mind
+						</p>
+						<p>
+							goal: keep customer system landscapes consistent / manageable, large projects - design assumptions
+						</p>
+						<p>
+							knows every system, unique ID
+						</p>
+						<p>
+							consistent release and patch levels along transport routes (frozen zones)
+						</p>
+						<p>
+							distinct source system for every customer object - master object, changes 
+						</p>
+						<p>
+							relies on local governance: ensure consistency of the developed objects 
+						</p>
+						<p>
+							CTS neither intended nor designed as delivery tool, ship objects between disconnected system landscapes. What might go wrong, I hear you ask? Follow me into the Transport Horror Picture Show...
+						</p>
+					</aside>
+				</section>
+
+			</section>
+
+			<section>
+				<h3>1d33664: Instant Death</h3>
+
+			<!--
+				Make sure that your SAP system ID:
+				n Is unique throughout your organization
+				n Consists of exactly three alphanumeric characters
+				n Contains only uppercase letters
+				n Has a letter for the first character
+				n Does not include any of the following, which are reserved
+				IDs:
+				ADD ALL AND ANY ASC COM DBA END EPS FOR GID IBM
+				INT KEY LOG MON NIX NOT OFF OMS RAW ROW SAP SET
+				SGA SHG SID SQL SYS TMP UID USR VAR
+				- d. h. 26 * 36 * 36 - 32 -->
+
+				<section>
+					<h4>Challenge</h4>
+					<div class="multicol">
+						<div class="col fragment">
+							<p>
+								Producer
+							</p>
+							<ul>
+								<li>Source System <span class="fixed-highlight-green">DEV</span></li>
+								<li class="fragment">Transport <span class="fixed-highlight-green">DEV</span>K912345</li>
+								<li class="fragment">Files K912345.<span class="fixed-highlight-green">DEV</span> and R912345.<span class="fixed-highlight-green">DEV</span></li>
+							</ul>
+						</div>
+						<div class="col fragment">
+							<p>
+								Customer
+							</p>
+							<ul>
+								<li>Three-system landscape</li>
+								<li class="fragment"><span class="fixed-highlight-red">DEV</span> ▶ TST ▶ PRD</li>
+							</ul>
+						</div>
+					</div>
+					<p>
+						<div class="fragment">🔥 File and transport name collisions</div>
+						<div class="fragment">🔥 Wrong source system identification</div>
+					</p>
+					<aside class="notes">
+						<p>
+							edge case: chances slim, but real trouble
+						</p>
+						<p>
+							system ID (SID) of source system contained in transport key transport file names - example. Fine so far - zip it, ship it. 
+						</p>
+						<p>
+							new customer tomorrow, usual three-system landschape, brilliant idea: naming development system DEV
+						</p>
+						<p>
+							probably already conflicting transport names, if not, sooner or later
+						</p>
+						<p>
+							More importantly: original system = SID. customer DEV system will treat objects as locally produced originals
+						</p>
+						<p>
+							Now imagine for a second writing to your CEO "I regret to inform you that we can not accept XYZ as a customer because of colliding local naming conventions"...
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Solution</h4>
+					<p>
+						Software Component
+					</p>
+					<ul>
+						<li class="fragment" data-fragment-index="1"><span class="fixed-highlight-green">SAP</span>K<span class="fixed-highlight-green">-</span>101COIN<span class="fragment highlight-red" data-fragment-index="2">XYABC</span></li>
+						<li class="fragment" data-fragment-index="2">registered namespace /<span class="fixed-highlight-red">XYABC</span>/ required</li>
+						<li class="fragment" data-fragment-index="3">
+							<div>included in standard display:</div>
+							<img src="img/ComponentVersions.png" width="70%"/>
+						</li>
+					</ul>
+					<aside class="notes">
+						<p>
+							solution: deliver software components
+						</p>
+						<p>
+							parts of CTS used; identifiers / file names can never collide: transport numbers start at 900.000 / 0, 9 designator for "customer transport"
+						</p>
+						<p>
+							packages / files: dash, always use source designator SAP which can never be customer system ID - no collisions
+						</p>
+						<p>
+							package names also contain software component name, determined from protected namespace - own as shown
+						</p>
+						<p>
+							bonus: listed in standard dialog
+						</p>
+					</aside>
+				</section>
+
+			</section>
+
+			<section>
+				<h3>Modifications</h3>
+
+				<section>
+					<h4>Challenge</h4>
+					<ul>
+						<li class="fragment">Disencouraged, but necessary (emergency corrections)</li>
+						<li class="fragment">Possible with consumer key</li>
+						<li class="fragment">CTS support limited: protection against overwriting modified objects accidentally</li>
+					</ul>
+					<p>
+						<div class="fragment">🔥 No merge tooling: out of scope of (local!) CTS</div>
+					</p>
+					<aside class="notes">
+						<p>
+							modifications to your software in target systems.
+						</p>
+						<p>
+							sometimes necessary: no correction notes. depending on criticality of issue, local repair by modification required.
+						</p>
+						<p>
+							grant customers ability to modify software via consumer key - "light side". can not prevent dark side
+						</p>
+						<p>
+							CTS support: none. stop if encounters modified object; flag "ignore collision and import anyway". CTS will copy entire object, not patch - no merge. customer documentation,  ressources to reapply modifications
+						</p>
+						<p>
+							looks like flaw of CTS, but: direct consequence of assumption that every customer object has local source system. modifications = advance corrections in emergency; apply correction in source system ASAP. CTS not designed to handle issues that occur during product delivery.
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Solution</h4>
+					<p>
+						Full SPDD and SPAU support, including "Modifikationsabgleichstransporte"
+					</p>
+					<p>
+						(Sorry, no screenshots - our systems are clean...)
+					</p>
+					<aside class="notes">
+						<p>
+							The solution provided by the AAK - actually, it isn't.
+						</p>
+						<p> 
+							use the same "extended" import mechanism as SAP standard - full SPDD and SPAU functionality for granted. No provisions, customers use known tools.
+						</p>
+						<p>
+							support for "Modifikationsabgleichstransport", included in installation process in subsequent systems
+						</p>
+					</aside>
+				</section>
+
+			</section>
+
+			<section>
+				<h3>Dependencies and Ordering</h3>
+
+				<section>
+					<h4>Challenge</h4>
+					<ul>
+						<li class="fragment">no information about dependencies</li>
+						<li class="fragment">no enforcement of import order</li>
+						<li class="fragment">consistency across system landscape not guaranteed</li>
+						<li class="fragment">very time-consuming to debug and fix</li>
+						<li class="fragment">applies to both upgrades and component dependencies</li>
+					</ul>
+					<p>
+						<div class="fragment">🔥 Consistent object delivery not guaranteed</div>
+					</p>
+					<aside class="notes">
+						<p>
+							common problem: CTS has limited safeguards against importing in wrong order, but no real dependency management, no check for missing, skipped, out-of-order transports
+						</p>
+						<p>
+							import transport in any order: up-, down-, crossgrading software or parts at will. Worse: correct order in dev system, order mixed up in subsequent systems (prod!)
+						</p>
+						<p>
+							Transportorderitis bad disorder: takes a lot of time to diagnose and treat
+						</p>
+						<p>
+							Dependencies and import order: seem like distinct issues, but just faces of same coin. Order of import during upgrade: each version has predecessor as dependency. Out of scope...
+						</p>
+						<p>
+							Ensuring consistent delivery of all objects under all circumstances using the CTS is hardly possible. A lot depends on the correct handling on the customer side, and - speaking from experience - a lot of things can and will go wrong there.
+						</p>
+					</aside>
+				</section>
+				<!-- MARK -->
+				<section>
+					<h4>Solution</h4>
+					<div class="multicol">
+						<div class="col">
+							<ul>
+								<li class="fragment" data-fragment-index="1">Specifications of dependencies in package attributes</li>
+								<li class="fragment">Order of support packages enforded automatically</li>
+								<li class="fragment">Mandatory check before installation</li>
+							</ul>
+						</div>
+						<div class="col fragment" data-fragment-index="1">
+							<img src="img/SDA-Attributes.png" />
+						</div>
+					</div>
+					<aside class="notes">
+						<p>
+							package registration: constraints. dependencies with or w/o version. upgrades: minimum previous version, prevents omitting of too many upgrades
+						</p>
+						<p>
+							customer can upload all packages and have installation tool perform multiple upgrades in one operation
+						</p>
+						<p>
+							support packages: SPAM enforces sequential import 
+						</p>
+						<p>
+							checks mandatory during preparation of installation
+						</p>
+						<p>
+							dependency management on software component level, coarser than usual. AAK would support more fine-grained approach, but small number of large software components sufficient and reduces overhead 
+						</p>
+					</aside>
+				</section>
+
+			</section>
+
+			<section>
+				<h3>Removing Stuff</h3>
+
+				<section>
+					<h4>Challenges</h4>
+					<div class="multicol">
+						<div class="col fragment" data-fragment-index="1">
+							<p>
+								Individual objects:
+							</p>
+							<ul>
+								<li class="fragment" data-fragment-index="2">deletion supported</li>
+								<li class="fragment" data-fragment-index="3">once only (w/o hacks)</li>
+								<li class="fragment" data-fragment-index="4">even more import ordering issues</li>
+							</ul>
+						</div>
+						<div class="col fragment" data-fragment-index="6">
+							<p>
+								Entire software:
+							</p>
+							<ul>
+								<li class="fragment" data-fragment-index="7">no deletion from original system</li>
+								<li class="fragment" data-fragment-index="8">theoretically possible with separate system</li>
+								<li class="fragment" data-fragment-index="9">huge manual effort, very error-prone</li>
+							</ul>
+						</div>
+					</div>
+					<div class="multicol">
+						<div class="col fragment" data-fragment-index="5">
+							<p>
+								🧟 Beware of zombies!
+							</p>			
+						</div>
+						<div class="col fragment" data-fragment-index="10">
+							<p>
+								🔥 No proven solution.
+							</p>
+						</div>
+					</div>
+
+					<aside class="notes">
+						<p>
+							so far getting stuff into  customer system -  how  get rid of it? two facets, depends on "stuff"
+						</p>
+						<p>
+							individual objects supposedly easy -  CTS supports deletion of objects. But: not designed for general-purpose software delivery.  export object deletion record once, no further transports. direct consequence:  customers have to obey import order, may not skip transport, lest "zombie" objects occur (enhancement - class)
+						</p>
+						<p>
+							entire software package: no easy way. no deletion in customer system,  can't assemble  deletion transport from development system.  second empty system  required -  might as well move to AAK 
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Solution</h4>
+					<div class="multicol">
+						<div class="col fragment">
+							<p>
+								Individual objects:
+							</p>
+							<ul>
+								<li>SDC: include or ignore</li>
+								<li>decision required</li>
+								<li class="fragment">Package attributes: prevent skipping of deletion</li>
+							</ul>
+						</div>
+						<div class="col fragment">
+							<p>
+								Entire software:
+							</p>
+							<ul>
+								<li>
+									Deinstallable Add-Ons
+									<img src="img/SAINT-Deinstall.png" width="80%" />
+								</li>
+								<li class="fragment">customization of deletion process</li>
+							</ul>
+						</div>
+					</div>					
+					<aside class="notes">
+						<p>
+							Software Delivery Composer notices deleted objects, choice of including deletions: objects don't vanish unnoticed. in conjunction with  package prerequisites, prevent undead objects
+						</p>
+						<p>
+							deinstallation of entire add-on: easy (guidelines);  AAK version 5, deinstallable packages  
+						</p>
+						<p>
+							process customizable, special preparations to keep customer system consistent after removal. functionally potentially complex, technically easy to handle
+						</p>
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<h3>Non-Technical Aspects</h3>
+
+				<section>
+					<div align="center" class="fragment fade-in">
+						<img src="img/one-does-not-simply.jpg" />
+					</div>
+					<aside class="notes">
+						<p>
+							leave remaining technical issues aside, one other aspect:
+						</p>
+						<p>
+							You won't find the Add-On Assembly Kit on your regular SAP order form.
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>ABAP Add-On Deployment Certification</h4>
+					<ul>
+						<li>Permission and requirement to use AAK</li>
+						<li class="fragment">Verification of compatibility and compliance by SAP</li>
+						<li class="fragment">Result: certified solution</li>
+						<li class="fragment">Proof of dedication and competence</li>
+					</ul>
+					<aside class="notes">
+						<p>
+							obtain  right to use AAK in conjunction with  service and certification package. AAK mandatory, only  official way to deliver ABAP add-ons
+						</p>
+						<p>
+							certification process includes  handing  software  to SAP, them  installing and cross-checking for compatibility or technical issues.  SAP ensures precautions and guidelines,  software  will not harm target system
+						</p>
+						<p>
+							result:  certificate,  permission to promote software using restricted logo and term
+						</p>
+						<p>
+							level of dedication does get noticed by customers.  not just basement hacker mailing transports around - demonstrated:  care about  details,  willing and able to maintain level of professionality. AAK forces  to think about  potential hazards, helps avoid them. Customers usually appreciate that.
+						</p>
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<h3>Implementation</h3>
+
+				<section>
+					<h4>Costs</h4>
+					<div align="center" class="fragment fade-in">
+						<img src="img/it-depends.jpg" width="35%"/>
+					</div>
+					<aside class="notes">
+						<p>
+							Let's assume for a moment that I've got you convinced so far and you want to start using the AAK.
+						</p>
+						<p>
+							If your CEO is at all like every CEO I've ever had, you'll still have to answer one question: How much? 
+						</p>
+						<p>
+							And like any scientist and engineer ever the only answer I can give you is: It depends.
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Direct Costs</h4>
+					<div align="center">
+						<img src="img/package-pricing.png" width="75%"/>
+					</div>
+					<aside class="notes">
+						<p>
+							subscription package: list price  15.000 € for  first year,  10.000 € for subsequent years, including one certification per year.  not an official statement of any kind. Search for "ABAP Add-On Deployment Certification" or contact the SAP Integration and Certification Center (ICC) for further information.
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Infrastructure: Basics</h4>
+					<div align="center">
+						<img src="img/ABAPDevLandscape-Diagram1.png" width="75%"/>
+					</div>
+					<aside class="notes">
+						<p>
+							process overview: infrastructure required. basic setup at least three systems: development, delivery, installation tests.
+						</p>
+						<p>
+							Depending on your requirements, that number can grow very fast. There are two main factors to consider.
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Infrastructure: Target Releases</h4>
+					<div align="center">
+						<img src="img/ABAPDevLandscape-Diagram5.png" width="75%"/>
+					</div>
+					<aside class="notes">
+						<p>
+							first question: How many target releases to support actively? basis release only, ECC release or Enhancement Package level or patch
+						</p>
+						<p>
+							How far to test and ensure compatibility?  latest patch level sufficient?  
+						</p>
+						<p>
+							code base identical for all target releases or release-specific subcomponents? 
+						</p>
+						<p>
+							All of this determines how many parallel development and delivery systems you need.
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Infrastructure: Maintenance Strategy</h4>
+					<div align="center">
+						<img src="img/ABAPDevLandscape-Diagram2.png" width="75%"/>
+					</div>
+					<aside class="notes">
+						<p>
+							second question: how many versions of own software to support at the same time? 
+						</p>
+						<p>
+							ability to produce patches for previous versions - how many?  example, still produce patches for version 1 and 2, even if version 3 in preparation or released
+						</p>
+						<p>
+							need that or nudge  customers towards upgrading 
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Infrastructure: Cont'd</h4>
+					<div class="multicol">
+						<div class="col">
+							<img src="img/ABAPDevLandscape-Diagram7.png" width="80%"/>
+						</div>
+						<div class="col">
+							<img src="img/qrcode-article.png" width="50%"/>
+							<!-- <div>https://bit.ly/2Vbp5NQ</div> -->
+							<small>https://volker-wegert.de/en/content/prof/sap/system-landscape-add-development</small>
+						</div>
+					</div>
+					<aside class="notes">
+						<p>
+							no one-size-fits-all answer. check this article 
+						</p>
+						<p>
+							hardware and virtual systems cheaper, but need expertise to setup and maintain. if basis administrator bills by the hour, in trouble
+						</p>
+					</aside>
+				</section>
+
+			</section>
+
+			<section>
+				<h4>Summary and Outlook</h4>
+				<div class="multicol">
+					<div class="col">
+						<p>Summary</p>
+						<ul>
+							<li>Process Overview</li>
+							<li>Challenges and Solutions</li>
+							<li>Benefits to Provider and Customer</li>
+							<li>Requirements and Costs</li>
+						</ul>
+					</div>
+					<div class="col fragment">
+						<p>Outlook</p>
+						<ul>
+							<li>Applications in cloud-based scenarios?</li>
+							<li>
+								<div>DSAG Webinar:</div>
+								<img src="img/qrcode-dsag.png" /> 
+								<!-- https://bit.ly/2JeFyK8
+									<small>https://www.dsag.de/veranstaltungen/2019-06/ak-infrastruktur-betrieb-webinar-was-kann-das-add-assembly-kit</small> -->
+								</li>
+							</div>
+						</div>
+
+						<aside class="notes">
+							<p>
+								summarize: brief overview of process and tools, discussed some issues to avoid
+							</p>
+							<p>
+								discussed augmented checks, enhanced package attribution capabilites, requirements and cost involved
+							</p> 
+							<p>
+								benefits to customers:  ease of installation and removal,  standardized processes known administrators;  full support for enhancements and modifications
+							</p>
+							<p>
+								add-on package is about as close to setup.abap as you can get, first-class "ABAP citizens"
+							</p>
+							<p>
+								SAP appears to have plans to further develop and extend AAK for use in cloud-based scenarios. no details, DSAG webinar on June 5th, more than 100 "seats" left
+							</p>
+						</aside>
+					</section>
+
+					<section>
+						<h2>Thank you.</h2>
+						<p>
+							<img src="img/Twitter_Social_Icon_Rounded_Square_Color.png" style="background:none; border:none; box-shadow:none; vertical-align: -50%;" width="5%" /> @vwegert 
+						</p>
+						<p>
+							https://volker-wegert.de
+						</p>
+						<aside class="notes">
+							With this, I'd like to thank you for your attention. Feel free to contact me if you're interested in this kind of stuff - and I believe we do have time for questions?
+						</aside>
+					</section>
+				</div>
+			</div>
+
+			<script src="../reveal.js/js/reveal.js"></script>
+			<script>
+				// More info about config & dependencies:
+				// - https://github.com/hakimel/reveal.js#configuration
+				// - https://github.com/hakimel/reveal.js#dependencies
+				Reveal.initialize({
+					controls: false,
+					hash: true,
+					center: false,
+					transition: 'slide',
+					dependencies: [
+					{ src: '../reveal.js/plugin/markdown/marked.js' },
+					{ src: '../reveal.js/plugin/markdown/markdown.js' },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true },
+					]
+				});
+			</script>
+		</body>
+		</html>

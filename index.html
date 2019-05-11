@@ -1,0 +1,670 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Patience of a SAINT</title>
+
+	<link rel="stylesheet" href="../reveal.js/css/reset.css">
+	<link rel="stylesheet" href="../reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../reveal.js/css/theme/night.css">
+
+	<style type="text/css">
+		section {
+			text-align: left;
+		}
+		.multicol {
+			display: flex;
+		}
+		.col {
+			flex: 1;
+		}
+		.fixed-highlight-green {
+			color: #17ff2e; 
+		}
+		.fixed-highlight-red {
+			color: #ff2c2d;
+		}
+		.ribbon {
+			/* positioning */
+			position: fixed;
+			padding: 5px 45px;
+			width: 256px;
+			/* top right of the page */
+			top: 50px;
+			right: -250px;
+			-webkit-transform: rotate(45deg);
+			-moz-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+			text-align: center;
+			/* effects with some shadow */
+			box-shadow: 0 0 0 3px #00946c, 0 0 20px -3px rgba(0, 0, 0, 0.5);
+			text-shadow: 0 0 0 #e5e5e5, 0 0 5px rgba(0, 0, 0, 0.3);
+			/* looks */
+			background-color: #00946c;
+			color: #e5e5e5;
+			font-size: 13px;
+			font-family: sans-serif;
+			text-decoration: none;
+			font-weight: bold;
+			/* ribbon effects */
+			border: 2px dotted #e5e5e5;
+			/* webkit antialias fix */
+			-webkit-backface-visibility: hidden;
+			letter-spacing: .5px;
+		}
+	</style>
+
+</head>
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section>
+
+				<section>
+					<h2>Patience of a SAINT</h2>
+					<p>Why and how to professionalize <br/> ABAP software delivery</p>
+				</section>
+
+				<section>
+					<h3>about://me</h3>
+					<p>Volker Wegert</p>
+					<p>Team Lead SAP Healthcare @ x-tention</p>
+					<div class="ribbon fragment">We are hiring!</div>
+					<div class="fragment">
+						<p>ABAP development since 2001/2002</p>
+						<p>Add-on production since 2008</p>
+					</div>
+				</section>
+
+			</section>
+
+			<section>
+				<h3>Overview</h3>
+
+				<section>
+					<h4>Scope</h4>
+
+					<p class="fragment" data-fragment-index="1">missing (intentionally):</p>
+					<ul>
+						<li class="fragment" data-fragment-index="2">software development guidelines / best practices</li>
+						<li class="fragment" data-fragment-index="2">testing and quality assurance</li>
+						<li class="fragment" data-fragment-index="3">technical software design</li>
+						<li class="fragment" data-fragment-index="3">functional design and product management</li>
+					</ul>
+					<p class="fragment">focus: <span class="fixed-highlight-green">software delivery</span></p>
+				</section>
+
+				<section>
+					<h4>Usage Scenarios</h4>
+					<p class="fragment" data-fragment-index="1">classic software product development:</p>
+					<ul>
+						<li class="fragment" data-fragment-index="1">extensible standard software</li>
+						<li class="fragment" data-fragment-index="1">develop locally, deploy globally</li>
+						<li class="fragment" data-fragment-index="2">little to no knowledge about customer systems</li>
+					</ul>
+					<p class="fragment" data-fragment-index="3">internal development:</p>
+					<ul>
+						<li class="fragment" data-fragment-index="4">multiple independent system sub-landscapes</li>
+						<li class="fragment" data-fragment-index="4">consolidation not feasible</li>
+						<li class="fragment" data-fragment-index="5">deployment of standardized solutions required</li>
+					</ul>
+				</section>
+
+				<section>
+					<h4><span class="fragment highlight-green">Product</span> Development Expectations</h4>
+					<ul class="fragment">
+						<li>paying customers</li>
+						<li>consolidated solution</li>
+						<li>low-risk installation</li>
+						<li>seamless integration</li>
+					</ul>
+					<ul class="fragment">
+						<li>vendor-based support and maintenance</li>
+						<li>limiting variations</li>
+						<li>customer-agnostic delivery</li>
+					</ul>
+				</section>
+
+				<section>
+					<h4>Distributed Development <span class="fragment highlight-red">Challenges</span></h4>
+					<ul class="fragment">
+						<li>security considerations</li>
+						<li>maintenance and responsibility</li>
+					</ul>
+					<ul class="fragment">
+						<li>vendor reputation</li>
+						<li>financial impact</li>
+					</ul>
+					<p class="fragment">No judgement - always consider intended use case!</p>
+				</section>				
+			</section>
+
+			<section>
+				<h3>Poll</h3>
+				<p>Who among you...</p>
+				<ul>
+					<li class="fragment">...should be using add-on based delivery?</li>
+					<li class="fragment">...is already producing add-ons?</li>
+					<li class="fragment">...is a customer / recipient?</li>
+					<li class="fragment">...🍕?</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Add-On Delivery Process</h3>
+				<section>
+					<div align="center">
+						<p>Development and Preparation</p>
+						<p>▼</p>
+						<p>Composition</p>
+						<p>▼</p>
+						<p>Assembly and Test</p>
+						<p>▼</p>
+						<p>Installation</p>
+					</div>
+				</section>		
+
+				<section>
+					<h4>Development and Preparation</h4>
+					<div class="multicol">
+						<div class="col">
+							<p>Development System</p>
+							<ul>
+								<li>regular ABAP development</li>
+								<li>some restrictions apply</li>
+							</ul>
+						</div>
+						<div class="col fragment">
+							<p>Delivery System</p>
+							<ul>
+								<li>identify missing objects</li>
+							</ul>
+						</div>
+					</div>
+					<div class="multicol fragment">
+						<div class="col">
+							<ul>
+								<li>frequently erratic settings</li>
+							</ul>
+						</div>
+						<div class="col">
+							<ul>
+								<li>stable testing environment</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h4>Software Delivery Composer</h4>
+					<div class="multicol">
+						<div class="col">
+							<img src="img/SDC.png" />
+						</div>
+						<div class="col">
+							<ul>
+								<li class="fragment">Object Collection, Checks</li>
+								<li class="fragment">Result: Installation / Upgrade or Support Package files</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h4>Software Delivery Assembler</h4>
+					<div class="multicol">
+						<div class="col">
+							<img src="img/SDA-1.png" width="90%" />
+						</div>
+						<div class="col">
+							<div class="multicol fragment">
+								<div class="col">
+									<img src="img/SDA-2.png" />		
+								</div>
+								<div class="col">
+									<img src="img/SDA-3.png" />
+								</div>
+							</div>
+							<div class="fragment">
+								<div>Result:</div>
+								<ul>
+									<li>PAT installation files</li>
+									<li>SAR archive for distribution</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h4>Installation</h4>
+					<div class="multicol">
+						<div class="col">
+							<img src="img/SAINT.png" width="80%" />	
+						</div>
+						<div class="col">
+							<img src="img/SPAM.png" width="80%" />
+							<div>SAINT / SPAM</div>	
+						</div>
+					</div>
+				</section>
+
+			</section>
+
+			<section>
+				<h3>Alternative Approaches</h3>
+
+				<section>
+					<h4>Candidates</h4>
+					<div class="multicol fragment">
+						<div class="col">
+							<img src="img/abapGit-SAPlink-Logos.png" width="80%" />
+						</div>
+						<div class="col">
+							<img src="img/TMS-Logo.png" width="80%" />
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h4>abapGit</h4>
+					<p>(also applies to SAPlink, ...)</p>
+					<ul>
+						<li class="fragment" data-fragment-index="1">highly automated copy & paste</li>
+						<li class="fragment" data-fragment-index="2"><span class="fixed-highlight-green">great tool</span> for certain applications</li>
+						<li class="fragment" data-fragment-index="2"><span class="fixed-highlight-red">wrong tool</span> for this task</li>
+						<li class="fragment" data-fragment-index="3">no special system access</li>
+						<li class="fragment" data-fragment-index="3">just another local editing tool</li>
+						<li class="fragment" data-fragment-index="3">rules and restrictions apply</li>
+					</ul>
+				</section>
+
+				<section>
+					<h4>Namespaces</h4>
+					<div class="multicol">
+						<div class="col fragment">
+							<div>Customer (Y.../Z...)</div>
+							<ul>
+								<li>freely available</li>
+								<li><span class="fixed-highlight-green">local</span> governance required</li>
+								<li><span class="fixed-highlight-red">no protection</span> against collisions</li>
+							</ul>
+						</div>
+						<div class="col fragment">
+							<div>Partner (/FOOBAR/...)</div>
+							<ul>
+								<li>enforce ownership</li>
+								<li><span class="fixed-highlight-green">global</span> protection enforced</li>
+								<li>distributed object editing <span class="fixed-highlight-red">prohibited</span></li>
+							</ul>
+						</div>
+					</div>
+					<p class="fragment">
+						🔥 No delivery into protected namespaces
+					</p>
+				</section>
+
+				<section>
+					<h4>Change and Transport System (CTS)</h4>
+					<div class="multicol">
+						<div class="col">
+							<p>
+								Records <span class="fragment highlight-red" data-fragment-index="1">changes to objects</span> in a system and <span class="fragment highlight-red" data-fragment-index="2">applies these changes</span> to a target system.
+							</p>
+							<p class="fragment" data-fragment-index="3">
+								⤷ diff / patch
+							</p>
+						</div>
+						<div class="col" >
+							<p>
+								<span class="fragment" data-fragment-index="1">Records <span class="fixed-highlight-green">changed objects</span> in a system</span> <span class="fragment" data-fragment-index="2">and <span class="fixed-highlight-green" >transfers the changed objects</span> to a target system.</span>
+							</p>
+							<p class="fragment" data-fragment-index="4">
+								⤷ flag / copy
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h4>CTS Design Considerations</h4>
+					<ul>
+						<li class="fragment">Goal: Customer System Landscape Consistency</li>
+						<li class="fragment">All systems known by unique SID</li>
+						<li class="fragment">Consistent release/patch levels</li>
+						<li class="fragment">Local source system for every customer object</li>
+						<li class="fragment">Local governance of development</li>
+					</ul>
+				</section>
+
+			</section>
+
+			<section>
+				<h3>1d33664: Instant Death</h3>
+
+			<!--
+				Make sure that your SAP system ID:
+				n Is unique throughout your organization
+				n Consists of exactly three alphanumeric characters
+				n Contains only uppercase letters
+				n Has a letter for the first character
+				n Does not include any of the following, which are reserved
+				IDs:
+				ADD ALL AND ANY ASC COM DBA END EPS FOR GID IBM
+				INT KEY LOG MON NIX NOT OFF OMS RAW ROW SAP SET
+				SGA SHG SID SQL SYS TMP UID USR VAR
+				- d. h. 26 * 36 * 36 - 32 -->
+
+				<section>
+					<h4>Challenge</h4>
+					<div class="multicol">
+						<div class="col fragment">
+							<p>
+								Producer
+							</p>
+							<ul>
+								<li>Source System <span class="fixed-highlight-green">DEV</span></li>
+								<li class="fragment">Transport <span class="fixed-highlight-green">DEV</span>K912345</li>
+								<li class="fragment">Files K912345.<span class="fixed-highlight-green">DEV</span> and R912345.<span class="fixed-highlight-green">DEV</span></li>
+							</ul>
+						</div>
+						<div class="col fragment">
+							<p>
+								Customer
+							</p>
+							<ul>
+								<li>Three-system landscape</li>
+								<li class="fragment"><span class="fixed-highlight-red">DEV</span> ▶ TST ▶ PRD</li>
+							</ul>
+						</div>
+					</div>
+					<p>
+						<div class="fragment">🔥 File and transport name collisions</div>
+						<div class="fragment">🔥 Wrong source system identification</div>
+					</p>
+				</section>
+
+				<section>
+					<h4>Solution</h4>
+					<p>
+						Software Component
+					</p>
+					<ul>
+						<li class="fragment" data-fragment-index="1"><span class="fixed-highlight-green">SAP</span>K<span class="fixed-highlight-green">-</span>101COIN<span class="fragment highlight-red" data-fragment-index="2">XYABC</span></li>
+						<li class="fragment" data-fragment-index="2">registered namespace /<span class="fixed-highlight-red">XYABC</span>/ required</li>
+						<li class="fragment" data-fragment-index="3">
+							<div>included in standard display:</div>
+							<img src="img/ComponentVersions.png" width="70%"/>
+						</li>
+					</ul>
+				</section>
+
+			</section>
+
+			<section>
+				<h3>Modifications</h3>
+
+				<section>
+					<h4>Challenge</h4>
+					<ul>
+						<li class="fragment">Disencouraged, but necessary (emergency corrections)</li>
+						<li class="fragment">Possible with consumer key</li>
+						<li class="fragment">CTS support limited: protection against overwriting modified objects accidentally</li>
+					</ul>
+					<p>
+						<div class="fragment">🔥 No merge tooling: out of scope of (local!) CTS</div>
+					</p>
+				</section>
+
+				<section>
+					<h4>Solution</h4>
+					<p>
+						Full SPDD and SPAU support, including "Modifikationsabgleichstransporte"
+					</p>
+					<p>
+						(Sorry, no screenshots - our systems are clean...)
+					</p>
+				</section>
+
+			</section>
+
+			<section>
+				<h3>Dependencies and Ordering</h3>
+
+				<section>
+					<h4>Challenge</h4>
+					<ul>
+						<li class="fragment">no information about dependencies</li>
+						<li class="fragment">no enforcement of import order</li>
+						<li class="fragment">consistency across system landscape not guaranteed</li>
+						<li class="fragment">very time-consuming to debug and fix</li>
+						<li class="fragment">applies to both upgrades and component dependencies</li>
+					</ul>
+					<p>
+						<div class="fragment">🔥 Consistent object delivery not guaranteed</div>
+					</p>
+				</section>
+
+				<section>
+					<h4>Solution</h4>
+					<div class="multicol">
+						<div class="col">
+							<ul>
+								<li class="fragment" data-fragment-index="1">Specifications of dependencies in package attributes</li>
+								<li class="fragment">Order of support packages enforded automatically</li>
+								<li class="fragment">Mandatory check before installation</li>
+							</ul>
+						</div>
+						<div class="col fragment" data-fragment-index="1">
+							<img src="img/SDA-Attributes.png" />
+						</div>
+					</div>
+				</section>
+
+			</section>
+
+			<section>
+				<h3>Removing Stuff</h3>
+
+				<section>
+					<h4>Challenges</h4>
+					<div class="multicol">
+						<div class="col fragment" data-fragment-index="1">
+							<p>
+								Individual objects:
+							</p>
+							<ul>
+								<li class="fragment" data-fragment-index="2">deletion supported</li>
+								<li class="fragment" data-fragment-index="3">once only (w/o hacks)</li>
+								<li class="fragment" data-fragment-index="4">even more import ordering issues</li>
+							</ul>
+						</div>
+						<div class="col fragment" data-fragment-index="6">
+							<p>
+								Entire software:
+							</p>
+							<ul>
+								<li class="fragment" data-fragment-index="7">no deletion from original system</li>
+								<li class="fragment" data-fragment-index="8">theoretically possible with separate system</li>
+								<li class="fragment" data-fragment-index="9">huge manual effort, very error-prone</li>
+							</ul>
+						</div>
+					</div>
+					<div class="multicol">
+						<div class="col fragment" data-fragment-index="5">
+							<p>
+								🧟 Beware of zombies!
+							</p>			
+						</div>
+						<div class="col fragment" data-fragment-index="10">
+							<p>
+								🔥 No proven solution.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h4>Solution</h4>
+					<div class="multicol">
+						<div class="col fragment">
+							<p>
+								Individual objects:
+							</p>
+							<ul>
+								<li>SDC: include or ignore</li>
+								<li>decision required</li>
+								<li class="fragment">Package attributes: prevent skipping of deletion</li>
+							</ul>
+						</div>
+						<div class="col fragment">
+							<p>
+								Entire software:
+							</p>
+							<ul>
+								<li>
+									Deinstallable Add-Ons
+									<img src="img/SAINT-Deinstall.png" width="80%" />
+								</li>
+								<li class="fragment">customization of deletion process</li>
+							</ul>
+						</div>
+					</div>					
+				</section>
+			</section>
+
+			<section>
+				<h3>Non-Technical Aspects</h3>
+
+				<section>
+					<div align="center" class="fragment fade-in">
+						<img src="img/one-does-not-simply.jpg" />
+					</div>
+				</section>
+
+				<section>
+					<h4>ABAP Add-On Deployment Certification</h4>
+					<ul>
+						<li>Permission and requirement to use AAK</li>
+						<li class="fragment">Verification of compatibility and compliance by SAP</li>
+						<li class="fragment">Result: certified solution</li>
+						<li class="fragment">Proof of dedication and competence</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<h3>Implementation</h3>
+
+				<section>
+					<h4>Costs</h4>
+					<div align="center" class="fragment fade-in">
+						<img src="img/it-depends.jpg" width="35%"/>
+					</div>
+				</section>
+
+				<section>
+					<h4>Direct Costs</h4>
+					<div align="center">
+						<img src="img/package-pricing.png" width="75%"/>
+					</div>
+				</section>
+
+				<section>
+					<h4>Infrastructure: Basics</h4>
+					<div align="center">
+						<img src="img/ABAPDevLandscape-Diagram1.png" width="75%"/>
+					</div>
+				</section>
+
+				<section>
+					<h4>Infrastructure: Target Releases</h4>
+					<div align="center">
+						<img src="img/ABAPDevLandscape-Diagram5.png" width="75%"/>
+					</div>
+				</section>
+
+				<section>
+					<h4>Infrastructure: Maintenance Strategy</h4>
+					<div align="center">
+						<img src="img/ABAPDevLandscape-Diagram2.png" width="75%"/>
+					</div>
+				</section>
+
+				<section>
+					<h4>Infrastructure: Cont'd</h4>
+					<div class="multicol">
+						<div class="col">
+							<img src="img/ABAPDevLandscape-Diagram7.png" width="80%"/>
+						</div>
+						<div class="col">
+							<img src="img/qrcode-article.png" width="50%"/>
+							<!-- <div>https://bit.ly/2Vbp5NQ</div> -->
+							<small>https://volker-wegert.de/en/content/prof/sap/system-landscape-add-development</small>
+						</div>
+					</div>
+				</section>
+
+			</section>
+
+			<section>
+				<h4>Summary and Outlook</h4>
+				<div class="multicol">
+					<div class="col">
+						<p>Summary</p>
+						<ul>
+							<li>Process Overview</li>
+							<li>Challenges and Solutions</li>
+							<li>Benefits to Provider and Customer</li>
+							<li>Requirements and Costs</li>
+						</ul>
+					</div>
+					<div class="col fragment">
+						<p>Outlook</p>
+						<ul>
+							<li>Applications in cloud-based scenarios?</li>
+							<li>
+								<div>DSAG Webinar:</div>
+								<img src="img/qrcode-dsag.png" /> 
+								<!-- https://bit.ly/2JeFyK8
+									<small>https://www.dsag.de/veranstaltungen/2019-06/ak-infrastruktur-betrieb-webinar-was-kann-das-add-assembly-kit</small> -->
+								</li>
+							</div>
+						</div>
+					</section>
+
+					<section>
+						<h2>Thank you.</h2>
+						<p>
+							<img src="img/Twitter_Social_Icon_Rounded_Square_Color.png" style="background:none; border:none; box-shadow:none; vertical-align: -50%;" width="5%" /> @vwegert 
+						</p>
+						<p>
+							https://volker-wegert.de
+						</p>
+					</section>
+				</div>
+			</div>
+
+			<script src="../reveal.js/js/reveal.js"></script>
+			<script>
+				// More info about config & dependencies:
+				// - https://github.com/hakimel/reveal.js#configuration
+				// - https://github.com/hakimel/reveal.js#dependencies
+				Reveal.initialize({
+					controls: false,
+					hash: true,
+					center: false,
+					transition: 'slide',
+					dependencies: [
+					{ src: '../reveal.js/plugin/markdown/marked.js' },
+					{ src: '../reveal.js/plugin/markdown/markdown.js' },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true },
+					]
+				});
+			</script>
+		</body>
+		</html>
